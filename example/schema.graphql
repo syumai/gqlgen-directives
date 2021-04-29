@@ -1,0 +1,53 @@
+directive @oneOf on INPUT_OBJECT
+
+interface Fruit {
+  id: ID!
+  color: Color!
+}
+
+enum Color {
+  RED
+  YELLOW
+  PURPLE
+}
+
+type Apple implements Fruit {
+  id: ID!
+  color: Color!
+}
+
+type Banana implements Fruit {
+  id: ID!
+  color: Color!
+}
+
+type Grape implements Fruit {
+  id: ID!
+  color: Color!
+}
+
+type Query {
+  fruits: [Fruit!]!
+}
+
+input FruitInput @oneOf {
+  apple: AppleInput
+  banana: BananaInput
+  grape: GrapeInput
+}
+
+input AppleInput {
+  color: Color!
+}
+
+input BananaInput {
+  color: Color!
+}
+
+input GrapeInput {
+  color: Color!
+}
+
+type Mutation {
+  createFruit(input: FruitInput!): Fruit!
+}
